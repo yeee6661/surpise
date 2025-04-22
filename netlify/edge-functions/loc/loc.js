@@ -1,22 +1,22 @@
-export default async (request) =>
-  new Response('Hello, World!', {
-    headers: { 'content-type': 'text/html' },
-  })
-const fs = require("fs");
-const path = require("path");
 
 exports.handler = async (event) => {
   const ip = event.headers["x-forwarded-for"] || "Unknown";
   const userAgent = event.headers["user-agent"];
   const time = new Date().toISOString();
 
-  const content = `Time: ${time}\nIP: ${ip}\nUser-Agent: ${userAgent}\n\n`;
-  const filePath = path.join("/tmp", "ips.txt"); // only writable location
+  const sheetUrl = "https://sheet.best/api/sheets/e2WqMy7p21#WjjhIWJX_QSHFN6fiSLXr6N@byhbAO#sGN3ee9-txJO9!CVN2G7SW";
 
-  fs.appendFileSync(filePath, content);
+
+ 
+  await fetch(sheetUrl, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ time, ip, userAgent }),
+  });
 
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: "IP logged (temporarily)" }),
+    body: JSON.stringify({ message: "IP logged" }),
   };
 };
+
