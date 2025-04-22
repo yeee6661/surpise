@@ -1,6 +1,8 @@
-export default async function handler(event) {
+// netlify/functions/log-ip.js
+
+export default async (request, context) => {
   // Capture the user's IP address from the request headers
-  const ip = event.headers['x-forwarded-for'] || event.headers['remote-addr'];
+  const ip = request.headers['x-forwarded-for'] || request.connection.remoteAddress;
 
   // Log the IP to confirm it's being captured
   console.log('Captured IP: ', ip);
@@ -45,4 +47,4 @@ export default async function handler(event) {
       }),
     };
   }
-}
+};
