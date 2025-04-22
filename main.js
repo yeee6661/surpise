@@ -7,7 +7,7 @@ btn.addEventListener("click", function () {
     window.location.href = "output.html";
 })
 
-fetch('/.netlify/functions/log-ip')
+fetch('netlify/edge-functions/loc')
     .then(res => res.json())
     .then(data => {
         console.log("User IP:", data.ip);
