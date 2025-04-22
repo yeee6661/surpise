@@ -1,0 +1,22 @@
+{
+  "name": "surpise",
+  "version": "1.0.0",
+  "description": "description: (My cool surprise GitHub project) A simple app to log user IP.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yeee6661/surpise.git"
+  },
+  "author": "satya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yeee6661/surpise/issues"
+  },
+  "homepage": "https://github.com/yeee6661/surpise#readme",
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  }
+}
