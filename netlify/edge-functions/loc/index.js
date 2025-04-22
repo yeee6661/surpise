@@ -1,27 +1,25 @@
 export default async function handler(request) {
   try {
-    // Log the request headers to verify the incoming data
-    console.log(request.headers);
+    // Get the incoming JSON data (latitude and longitude) from the request body
+    const { latitude, longitude } = await request.json();
 
-    // Try to extract the IP from the 'x-forwarded-for' header
-    const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
+    // Log the captured coordinates for debugging
+    console.log('Captured Latitude:', latitude);
+    console.log('Captured Longitude:', longitude);
 
-    // Check if the IP is in IPv6 format and log it
-    if (ip.includes(':')) {
-      console.log('Captured IPv6 address:', ip);
-    } else {
-      console.log('Captured IPv4 address:', ip);
-    }
-
-    // Prepare the data object with the correct field name that matches your Google Sheet column
-    const data = { 'IP Address': ip };
-
-    // Log the data being sent to Sheet.best for debugging
-    console.log('Sending data:', data);
-
+    // URL of your Sheet.best API (replace this with your actual Sheet.best URL)
     const sheetApiUrl = 'https://api.sheetbest.com/sheets/ba57befc-c8ec-468b-97b0-9f0def16168d';
-    
-    // Send data to the Google Sheets via Sheet.best API
+
+    // Prepare the data object to be sent to Google Sheets
+    const data = {
+      Latitude: latitude,
+      Longitude: longitude,
+    };
+
+    // Log the data being sent to Sheets for debugging
+    console.log('Sending data to Sheets:', data);
+
+    // Send the data to Google Sheets via the Sheet.best API
     const response = await fetch(sheetApiUrl, {
       method: 'POST',
       headers: {
@@ -30,15 +28,12 @@ export default async function handler(request) {
       body: JSON.stringify(data),
     });
 
-    // Get the result from the API response
+    // Get the result from Sheet.best API
     const result = await response.json();
 
-    // Log the response from Sheet.best API
-    console.log('API Response:', result);
-
-    // Return a success message along with the API result
+    // Return a success response with the result from the Sheet.best API
     return new Response(JSON.stringify({
-      message: 'IP captured and sent to Google Sheets!',
+      message: 'Location captured and sent to Google Sheets!',
       result,
     }), {
       status: 200,
@@ -47,11 +42,11 @@ export default async function handler(request) {
 
   } catch (error) {
     // Log error details for debugging
-    console.error('Error sending IP to Sheets:', error);
+    console.error('Error sending location to Sheets:', error);
 
     // Return an error response
     return new Response(JSON.stringify({
-      message: 'Failed to send IP to Google Sheets',
+      message: 'Failed to send location to Google Sheets',
       error: error.message,
     }), {
       status: 500,
@@ -59,3 +54,4 @@ export default async function handler(request) {
     });
   }
 }
+
