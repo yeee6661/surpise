@@ -2,4 +2,4 @@
 
 [[edge_functions]]
 function = "loc"
-path = "/.netlify/functions/loc"
+path = "/.netlify/edge-functions/loc"
