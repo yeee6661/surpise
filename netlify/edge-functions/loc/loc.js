@@ -3,7 +3,7 @@ export default async (request, context) => {
   const userAgent = request.headers.get("user-agent");
   const time = new Date().toISOString();
 
-  const sheetUrl = "https://sheet.best/api/sheets/e2WqMy7p21#WjjhIWJX_QSHFN6fiSLXr6N@byhbAO#sGN3ee9-txJO9!CVN2G7SW"; 
+  const sheetUrl = "https://api.sheetbest.com/sheets/ba57befc-c8ec-468b-97b0-9f0def16168d"; 
 
   await fetch(sheetUrl, {
     method: "POST",
