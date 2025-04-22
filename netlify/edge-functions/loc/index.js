@@ -7,7 +7,7 @@ export default async function handler(request) {
     const { latitude, longitude } = body;
 
     // Fallback geolocation from IP
-    const geoResponse = await fetch('https://ipapi.co/json/');
+    const geoResponse = await fetch(`https://ipapi.co/${ip}/json/`);
     const geoData = await geoResponse.json();
 
     const city = geoData.city || 'unknown';
