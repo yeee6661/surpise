@@ -1,6 +1,4 @@
-import fetch from 'node-fetch'; // Only needed if you're using Node.js, not in Edge functions
-
-export async function handler(event) {
+export default async function handler(event) {
   // Capture the user's IP address from the request headers
   const ip = event.headers['x-forwarded-for'] || event.headers['remote-addr'];
 
@@ -48,5 +46,3 @@ export async function handler(event) {
     };
   }
 }
-
-
