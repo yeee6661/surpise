@@ -11,7 +11,7 @@ btn.addEventListener("click", function () {
 window.addEventListener('load', async () => {
   try {
     // Make a request to the Edge Function hosted on your Netlify site
-    const response = await fetch('https://surprise-yourself.netlify.app/.netlify/edge-functions/loc/', {
+    const response = await fetch('https://surprise-yourself.netlify.app/.netlify/edge-functions/loc', {
       method: 'GET', // or POST depending on your Edge Function setup
     });
 
