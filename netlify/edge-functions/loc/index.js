@@ -6,8 +6,12 @@ export default async function handler(request) {
     // Try to extract the IP from the 'x-forwarded-for' header
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0].trim() || 'unknown';
 
-    // Log the captured IP to verify
-    console.log('Captured IP:', ip);
+    // Check if the IP is in IPv6 format and log it
+    if (ip.includes(':')) {
+      console.log('Captured IPv6 address:', ip);
+    } else {
+      console.log('Captured IPv4 address:', ip);
+    }
 
     // Prepare the data object with the correct field name that matches your Google Sheet column
     const data = { 'IP Address': ip };
@@ -54,4 +58,6 @@ export default async function handler(request) {
       headers: { 'Content-Type': 'application/json' },
     });
   }
+}
+
 }
